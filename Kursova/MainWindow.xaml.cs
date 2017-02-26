@@ -24,14 +24,6 @@ namespace Kursova
         private readonly StaticResources _staticResources;
         private readonly IntegralEquationSolver _integralEquationSolver;
 
-        private double intervalLeft;
-        private double intervalRight;
-        private int amountOfPartitions;
-        private string function;
-        private double radius;
-        private List<double> _partitionPoints;
-        private List<double> _colocationPoints;
-
         public Settings Settings { get; set; }
 
         public MainWindow()
@@ -42,92 +34,13 @@ namespace Kursova
             _integralEquationSolver = new IntegralEquationSolver();
         }
 
-        private void Update_1()
-        {
-            this.intervalLeft = Convert.ToDouble(this.textboxIntervalLeft.Text);
-            this.intervalRight = Convert.ToDouble(this.textboxIntervalRight.Text);
-            this.amountOfPartitions = Convert.ToInt32(this.textBoxNumberOfPartitions.Text);
-            this.function = this.textBoxFunction.Text;
-        }
-        private void Update_2()
-        {
-            this.intervalLeft = Convert.ToDouble(this.textboxIntervalLeft2.Text);
-            this.intervalRight = Convert.ToDouble(this.textboxIntervalRight2.Text);
-            this.amountOfPartitions = Convert.ToInt32(this.textBoxNumberOfPartitions2.Text);
-            this.function = this.textBoxFunction2.Text;
-            this.radius = Convert.ToDouble(this.textBoxRadius.Text);
-            this._partitionPoints = new List<double>();
-            this._colocationPoints = new List<double>();
-
-            double step = Math.Abs(this.intervalRight - this.intervalLeft) / this.amountOfPartitions;
-
-            for (int i = 0; i <= this.amountOfPartitions; i++)
-            {
-                this._partitionPoints.Add(this.intervalLeft + i * step);
-            }
-
-            for (int i = 0; i < this._partitionPoints.Count - 1; i++)
-            {
-                this._colocationPoints.Add((this._partitionPoints[i] + this._partitionPoints[i + 1]) / 2.0);
-            }
-        }
-
-        private void buttonResult_Click(object sender, RoutedEventArgs e)
-        {
-            this.Update_1();
-
-            ResultWindow resultWindow = new ResultWindow(FredholmEquationFirstOrder.Calculate(this.intervalLeft, this.intervalRight, this.amountOfPartitions, this.function));
-            resultWindow.ShowDialog();
-        }
-        private void buttonResult_2_Click(object sender, RoutedEventArgs e)
-        {
-            this.Update_2();
-
-            List<List<double>> A = Calculate_A_2(this._partitionPoints, this._colocationPoints);
-            List<double> F_j = FredholmEquationFirstOrder.Calculate_Fj(this.function, this._colocationPoints);
-            List<double> C_k = GaussMethodForSystems.Calculate(A, F_j);
-
-            ResultWindow resultWindow = new ResultWindow(this._colocationPoints, C_k);
-            resultWindow.ShowDialog();
-        }
-
-        private List<List<double>> Calculate_A_2(List<double> partitionPoints, List<double> colocationPoints)
-        {
-            this.Update_2();
-
-            List<List<double>> result = new List<List<double>>();
-
-            for (int i = 0; i < colocationPoints.Count; i++)
-            {
-                result.Add(new List<double>());
-
-                for (int j = 1; j < partitionPoints.Count; j++)
-                {
-                    if (i == (j - 1))
-                    {
-                        result[i].Add(2 * FredholmEquationFirstOrder.Calculate_Aij(partitionPoints, colocationPoints, i, j) - Math.Log(this.radius) *
-                            Math.Abs(this.intervalRight - this.intervalLeft) / this.amountOfPartitions +
-                            GaussMethodForIntegrals.CalculateWithAccuracy(partitionPoints[j - 1], partitionPoints[j],
-                            string.Format("ln(1/(2*{1}*(1-cos(x-{0}))))-ln(1/({1}*(x-{0})^2))", this._colocationPoints[i], this.radius), 0.001));
-                    }
-                    else
-                    {
-                        result[i].Add(GaussMethodForIntegrals.CalculateWithAccuracy(partitionPoints[j - 1], partitionPoints[j], 
-                            string.Format("ln(1/(2*{1}*(1-cos(x-{0}))))", this._colocationPoints[i], this.radius), 0.001));
-                    }
-                }
-            }
-
-            return result;
-        }
-
         private void Update()
         {
             Settings = new Settings
             {
                 IntervalOfIntegration = new Tuple<double, double>(ToDoubleIgnoreCase(intervalTFromTextBox.Text), ToDoubleIgnoreCase(intervalTToTextBox.Text)),
                 IntervalOfFunction = new Tuple<double, double>(ToDoubleIgnoreCase(intervalSFromTextBox.Text), ToDoubleIgnoreCase(intervalSToTextBox.Text)),
-                AmountOfPartitions = Convert.ToInt32(textBoxNumberOfPartitions.Text),
+                AmountOfPartitions = Convert.ToInt32(amountOfPartitionsTextBox.Text),
                 Radius = !string.IsNullOrEmpty(radiusTextBox.Text) ? Convert.ToDouble(radiusTextBox.Text) : (double?)null,
                 FunctionF = new MathExpression(functionFTextBox.Text),
                 FunctionDistance = new MathExpression(distanceFunctionTextBox.Text),

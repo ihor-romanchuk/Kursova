@@ -25,7 +25,35 @@ namespace Kursova
         public MathExpression FunctionDistance { get; set; }
         public MathExpression FunctionYakobian { get; set; }
         public List<string> Variables { get; set; }
-        public List<double> PartitionPoints { get; set; }
-        public List<double> ColocationPoints { get; set; }
+        public List<double> PartitionPoints
+        {
+            get
+            {
+                var partitionPoints = new List<double>();
+                double step = Math.Abs(IntervalOfIntegration.Item2 - IntervalOfIntegration.Item1) / AmountOfPartitions;
+
+                for (int i = 0; i <= AmountOfPartitions; i++)
+                {
+                    partitionPoints.Add(IntervalOfIntegration.Item1 + i * step);
+                }
+
+                return partitionPoints;
+            }
+        }
+        public List<double> ColocationPoints
+        {
+            get
+            {
+                var colocationPoints = new List<double>();
+                List<double> partitionPoints = PartitionPoints;
+
+                for (int i = 0; i < partitionPoints.Count - 1; i++)
+                {
+                    colocationPoints.Add((partitionPoints[i] + partitionPoints[i + 1]) / 2.0);
+                }
+
+                return colocationPoints;
+            }
+        }
     }
 }

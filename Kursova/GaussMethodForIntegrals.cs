@@ -9,12 +9,11 @@ namespace Kursova
 {
     public static class GaussMethodForIntegrals
     {
-        public static double Calculate(double a, double b, int amountOfPartitions, string mathExpression)
+        public static double Calculate(double a, double b, int amountOfPartitions, MathExpression function, params Var[] variables)
         {
             List<double> Xk = new List<double>() { -0.8611363, -0.3399810, 0.3399810, 0.8611363 };
             List<double> Ck = new List<double>() { 0.3478548, 0.6521452, 0.6521452, 0.3478548 };
 
-            MathExpression function = new MathExpression(mathExpression);
             double result = 0;
 
             double step = (b - a) / amountOfPartitions;
@@ -27,7 +26,8 @@ namespace Kursova
                 double sum = 0;
                 for (int j = 0; j < Xk.Count; j++)
                 {
-                    sum += Ck[j] * function.Calculate((a_new + b_new) / 2.0 + (b_new - a_new) / 2.0 * Xk[j]);
+                    variables[0].Value = (a_new + b_new) / 2.0 + (b_new - a_new) / 2.0 * Xk[j];
+                    sum += Ck[j] * function.Calculate(variables);
                 }
 
                 result += sum * (b_new - a_new) / 2.0;
@@ -35,22 +35,22 @@ namespace Kursova
 
             return result;
         }
-        public static double CalculateWithAccuracy(double a, double b, string mathExpression, double epsilon)
+
+        public static double CalculateWithAccuracy(double a, double b, MathExpression function, double epsilon, params Var[] variables)
         {
             List<double> Xk = new List<double>() { -0.8611363, -0.3399810, 0.3399810, 0.8611363 };
             List<double> Ck = new List<double>() { 0.3478548, 0.6521452, 0.6521452, 0.3478548 };
 
-            MathExpression function = new MathExpression(mathExpression);
             double result;
             int n = 1;
 
-            double newResult = GaussMethodForIntegrals.Calculate(a, b, n, mathExpression);
+            double newResult = Calculate(a, b, n, function, variables);
 
             do
             {
                 n *= 2;
                 result = newResult;
-                newResult = GaussMethodForIntegrals.Calculate(a, b, n, mathExpression);                
+                newResult = Calculate(a, b, n, function, variables);
             }
             while (System.Math.Abs(newResult - result) > epsilon);
 

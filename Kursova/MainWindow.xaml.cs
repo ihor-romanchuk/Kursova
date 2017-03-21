@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PoohMathParser;
+using AutoMapper;
 
 namespace Kursova
 {
@@ -23,60 +24,27 @@ namespace Kursova
     {
         private readonly StaticResources _staticResources;
         private readonly IntegralEquationSolver _integralEquationSolver;
+        private readonly IMappingEngine _mappingEngine;
 
-        public Settings Settings { get; set; }
+        public MainWindowViewModel ViewModel { get; set; }
+        public Settings Settings { get; private set; }
 
         public MainWindow()
         {
-            InitializeComponent();
-
             _staticResources = new StaticResources();
+            _mappingEngine = Mapper.Engine;
             _integralEquationSolver = new IntegralEquationSolver();
+
+            Settings = _mappingEngine.Mapper.Map<Settings>(_staticResources.DefaultSettings.Value[GetEquationType()]);
+            ViewModel = _mappingEngine.Mapper.Map<MainWindowViewModel>(Settings);
+            DataContext = ViewModel;
+
+            InitializeComponent();
         }
-
-        private void Update()
-        {
-            Settings = new Settings
-            {
-                IntervalOfIntegration = new Tuple<double, double>(ToDoubleIgnoreCase(intervalTFromTextBox.Text), ToDoubleIgnoreCase(intervalTToTextBox.Text)),
-                IntervalOfFunction = new Tuple<double, double>(ToDoubleIgnoreCase(intervalSFromTextBox.Text), ToDoubleIgnoreCase(intervalSToTextBox.Text)),
-                AmountOfPartitions = Convert.ToInt32(amountOfPartitionsTextBox.Text),
-                Radius = !string.IsNullOrEmpty(radiusTextBox.Text) ? Convert.ToDouble(radiusTextBox.Text) : (double?)null,
-                FunctionF = new MathExpression(functionFTextBox.Text),
-                FunctionDistance = new MathExpression(distanceFunctionTextBox.Text),
-                FunctionYakobian = new MathExpression(yakobianFunctionTextBox.Text)
-            };
-
-            var partitionPoints = new List<double>();
-            var colocationPoints = new List<double>();
-
-            double step = Math.Abs(Settings.IntervalOfIntegration.Item2 - Settings.IntervalOfIntegration.Item1) / Settings.AmountOfPartitions;
-
-            for (int i = 0; i <= Settings.AmountOfPartitions; i++)
-            {
-                partitionPoints.Add(Settings.IntervalOfIntegration.Item1 + i * step);
-            }
-
-            for (int i = 0; i < partitionPoints.Count - 1; i++)
-            {
-                colocationPoints.Add((partitionPoints[i] + partitionPoints[i + 1]) / 2.0);
-            }
-
-            Settings.PartitionPoints = partitionPoints;
-            Settings.ColocationPoints = colocationPoints;
-        }
-
-        public double ToDoubleIgnoreCase(string input)
-        {
-            //return Convert.ToDouble(new MathExpression(input.ToLower()).Calculate());
-            return Convert.ToDouble(input);
-        }
-
-        
 
         private void resultButton_Click(object sender, RoutedEventArgs e)
         {
-            Update();
+            _mappingEngine.Mapper.Map(ViewModel, Settings);
 
             var result = _integralEquationSolver.Solve(Settings, _staticResources.MatrixAInits.Value[GetEquationType()],
                 _staticResources.MatrixBInits.Value[GetEquationType()]);
@@ -84,31 +52,17 @@ namespace Kursova
             ResultWindow resultWindow = new ResultWindow(result);
             resultWindow.ShowDialog();
         }
-
-        private void UpdateSettingsView(Settings settings)
-        {
-            intervalTFromTextBox.Text = settings.IntervalOfIntegration.Item1.ToString();
-            intervalTToTextBox.Text = settings.IntervalOfIntegration.Item2.ToString();
-
-            intervalSFromTextBox.Text = settings.IntervalOfFunction.Item1.ToString();
-            intervalSToTextBox.Text = settings.IntervalOfFunction.Item2.ToString();
-
-            radiusTextBox.Text = settings.Radius.ToString();
-            functionFTextBox.Text = settings.FunctionF.ToString();
-            distanceFunctionTextBox.Text = settings.FunctionDistance.ToString();
-            yakobianFunctionTextBox.Text = settings.FunctionYakobian.ToString();
-            amountOfPartitionsTextBox.Text = settings.AmountOfPartitions.ToString();
-        }
         private void equationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(_staticResources?.DefaultSettings != null)
-            { 
-                UpdateSettingsView(_staticResources.DefaultSettings.Value[GetEquationType()]);
+            {
+                _mappingEngine.Mapper.Map(_staticResources.DefaultSettings.Value[GetEquationType()], ViewModel);
             }
         }
+
         private EquationsEnum GetEquationType()
         {
-            return (EquationsEnum)equationComboBox.SelectedIndex;
+            return (EquationsEnum)(equationComboBox?.SelectedIndex ?? 0);
         }
     }
 }

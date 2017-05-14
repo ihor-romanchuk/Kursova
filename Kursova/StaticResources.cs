@@ -1,9 +1,6 @@
-﻿using System;
+﻿using PoohMathParser;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PoohMathParser;
 
 namespace Kursova
 {
@@ -64,9 +61,10 @@ namespace Kursova
                 AmountOfPartitions = 10,
                 IntervalOfFunction = new Tuple<double, double>(0, 2 * Math.PI),
                 IntervalOfIntegration = new Tuple<double, double>(-1, 1),
-                FunctionDistance = new MathExpression("sqrt((a*cos(t)-s)^2+(a*sin(t))^2)"),
+                //FunctionDistance = new MathExpression("sqrt((a*cos(t)-s)^2+(a*sin(t))^2)"),
+                FunctionDistance = new MathExpression("sqrt(t^2-2*t*s+a^2)"),
                 FunctionF = new MathExpression((2 * Math.PI).ToString()),
-                FunctionYakobian = new MathExpression("a"),
+                FunctionYakobian = new MathExpression("1"),
                 Radius = 9,
                 Variables = new List<string> { "t", "s", "a" }
             });

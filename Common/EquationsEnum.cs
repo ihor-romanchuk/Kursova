@@ -1,4 +1,4 @@
-﻿namespace Kursova
+﻿namespace Common
 {
     public enum EquationsEnum
     {

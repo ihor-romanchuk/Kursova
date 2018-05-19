@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using PoohMathParser;
 
-namespace Kursova
+namespace Common
 {
     public static class FredholmEquationFirstOrder
     {

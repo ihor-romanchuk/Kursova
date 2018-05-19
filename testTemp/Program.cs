@@ -41,7 +41,7 @@ namespace Kursova
             //strW.Close();
 
             //1,3333989065833
-            Console.WriteLine(GaussMethodForIntegrals.CalculateWithAccuracy(2.5132741228718345907701147066236, 3.1415926535897932384626433832795, "ln(1/(2*9*(1-cos(x-2,827))))", 0.001));
+            //Console.WriteLine(GaussMethodForIntegrals.CalculateWithAccuracy(2.5132741228718345907701147066236, 3.1415926535897932384626433832795, "ln(1/(2*9*(1-cos(x-2,827))))", Constants.Epsilon));
         }
     }
 }

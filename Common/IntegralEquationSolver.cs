@@ -3,7 +3,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
 
-namespace Kursova
+namespace Common
 {
     public class IntegralEquationSolver
     {

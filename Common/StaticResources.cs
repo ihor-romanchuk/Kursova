@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Kursova
+namespace Common
 {
     public class StaticResources
     {
@@ -104,13 +104,13 @@ namespace Kursova
                         Math.Abs(settings.IntervalOfIntegration.Item2 - settings.IntervalOfIntegration.Item1) / settings.AmountOfPartitions +
                         GaussMethodForIntegrals.CalculateWithAccuracy(settings.PartitionPoints[j - 1], settings.PartitionPoints[j],
                         new MathExpression($"{settings.Radius.Value}*ln(1/({settings.FunctionDistance}))-ln(1/({settings.Radius.Value}*abs(t-{settings.ColocationPoints[i]})))"),
-                        0.001, new Var(settings.Variables[0], 0), new Var(settings.Variables[1], settings.ColocationPoints[i]), new Var(settings.Variables[2], settings.Radius.Value)));
+                        Constants.Epsilon, new Var(settings.Variables[0], 0), new Var(settings.Variables[1], settings.ColocationPoints[i]), new Var(settings.Variables[2], settings.Radius.Value)));
                 }
                 else
                 {
                     return (GaussMethodForIntegrals.CalculateWithAccuracy(settings.PartitionPoints[j - 1], settings.PartitionPoints[j],
                         new MathExpression($"{settings.Radius.Value}*ln(1/({settings.FunctionDistance}))"),
-                        0.001, new Var(settings.Variables[0], 0), new Var(settings.Variables[1], settings.ColocationPoints[i]), new Var(settings.Variables[2], settings.Radius.Value)));
+                        Constants.Epsilon, new Var(settings.Variables[0], 0), new Var(settings.Variables[1], settings.ColocationPoints[i]), new Var(settings.Variables[2], settings.Radius.Value)));
                 }
             });
 
@@ -118,7 +118,7 @@ namespace Kursova
             {
                 j++;
                 return GaussMethodForIntegrals.CalculateWithAccuracy(settings.PartitionPoints[j - 1], settings.PartitionPoints[j],
-                        new MathExpression($"ln(1/({settings.FunctionDistance}))*({settings.FunctionYakobian})"), 0.001,
+                        new MathExpression($"ln(1/({settings.FunctionDistance}))*({settings.FunctionYakobian})"), Constants.Epsilon,
                         new Var(settings.Variables[0], 0), new Var(settings.Variables[1], settings.ColocationPoints[i]), new Var(settings.Variables[2], settings.Radius.Value));
             });
 
@@ -126,7 +126,7 @@ namespace Kursova
             {
                 j++;
                 return GaussMethodForIntegrals.CalculateWithAccuracy(settings.PartitionPoints[j - 1], settings.PartitionPoints[j],
-                        new MathExpression($"ln(1/({settings.FunctionDistance}))*({settings.FunctionYakobian})"), 0.001,
+                        new MathExpression($"ln(1/({settings.FunctionDistance}))*({settings.FunctionYakobian})"), Constants.Epsilon,
                         new Var(settings.Variables[0], 0), new Var(settings.Variables[1], settings.ColocationPoints[i]), new Var(settings.Variables[2], settings.Radius.Value));
             });
 

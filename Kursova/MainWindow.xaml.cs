@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using AutoMapper;
+using Common;
 
 namespace Kursova
 {
@@ -32,6 +33,12 @@ namespace Kursova
         private void resultButton_Click(object sender, RoutedEventArgs e)
         {
             _mappingEngine.Mapper.Map(ViewModel, Settings);
+            Settings.PartitionPoints = Settings.GeneratePartitionPoints();
+            Settings.ColocationPoints = Settings.GenerateColocationPoints();
+            if (GetEquationType() == EquationsEnum.Equation_3_4)
+            {
+                //Settings.ColocationPoints = Settings.GenerateColocationPoints(-1, 1);
+            }
 
             var result = _integralEquationSolver.Solve(Settings, _staticResources.MatrixAInits.Value[GetEquationType()],
                 _staticResources.MatrixBInits.Value[GetEquationType()]);

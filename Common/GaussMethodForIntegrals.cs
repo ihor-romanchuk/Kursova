@@ -1,7 +1,7 @@
 ﻿using PoohMathParser;
 using System.Collections.Generic;
 
-namespace Kursova
+namespace Common
 {
     public static class GaussMethodForIntegrals
     {

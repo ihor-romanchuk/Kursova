@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class of general surface chart, not ready yet
+﻿// class of general surface chart, not ready yet
 // a few function will be used in child class
 // version 0.1
 

@@ -16,15 +16,15 @@
                             <TextBox x:Name="radiusTextBox" Height="23" Margin="62,4,5,0" TextWrapping="Wrap" Text="{Binding Radius, Mode = TwoWay}" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible"/>
                         </Grid>
                         <Grid>
-                            <Label Content="Lambda:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <TextBox x:Name="lambdaTextBox" Height="23" Margin="62,4,5,0" TextWrapping="Wrap" Text="{Binding Lambda, Mode = TwoWay}" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible"/>
+                            <Label Content="Lambda λ(x):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBox x:Name="lambdaTextBox" Height="23" Margin="80,4,5,0" TextWrapping="Wrap" Text="{Binding Lambda, Mode = TwoWay}" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible"/>
                         </Grid>
                         <Grid>
-                            <Label Content="Function f(s):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Function f(x):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBox x:Name="functionFTextBox" Height="23" Margin="83,4,5,0" TextWrapping="Wrap" Text="{Binding FunctionF, Mode = TwoWay}" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible"/>
                         </Grid>
                         <Grid>
-                            <Label Content="Function g(s):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Function g(x):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBox x:Name="functionGTextBox" Height="23" Margin="83,4,5,0" TextWrapping="Wrap" Text="{Binding FunctionG, Mode = TwoWay}" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible"/>
                         </Grid>
                         <Grid>
@@ -47,8 +47,8 @@
                 <DataGrid x:Name="dataGrid" CanUserAddRows="False" ColumnWidth="*"/>
             </ScrollViewer>
         </Grid>
-        <Image x:Name="equationImage" Margin="250,5,10,0" VerticalAlignment="Top" Source="Images/IntegralEquationSystem.png" IsEnabled="False"/>
-        <Grid Margin="250,130,0,0">
+        <Image x:Name="equationImage" Margin="250,5,10,0" VerticalAlignment="Top" Source="Images/Main problem.png" IsEnabled="False"/>
+        <Grid Margin="250,230,0,0">
             <Viewport3D Name="mainViewport" 
                     ClipToBounds = "False"  
                     IsHitTestVisible="false"

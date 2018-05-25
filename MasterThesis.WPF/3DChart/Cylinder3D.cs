@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class for a 3d cylinder model.
+﻿// class for a 3d cylinder model.
 // version 0.1
 
 namespace MasterThesis.WPF

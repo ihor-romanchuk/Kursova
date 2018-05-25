@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Kursova
+namespace SimplifiedEquations.WPF
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {

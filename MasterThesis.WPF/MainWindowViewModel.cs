@@ -5,7 +5,7 @@ namespace MasterThesis.WPF
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private double _radius;
-        private double _lambda;
+        private string _lambda;
         private string _functionF;
         private string _functionG;
         private int _partitionsOnCrack;
@@ -21,7 +21,7 @@ namespace MasterThesis.WPF
                 NotifyPropertyChanged(nameof(Radius));
             }
         }
-        public double Lambda
+        public string Lambda
         {
             get { return _lambda; }
             set

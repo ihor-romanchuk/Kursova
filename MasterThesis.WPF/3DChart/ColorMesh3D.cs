@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class for a color 3d mesh model. (each vertex can have different color)
+﻿// class for a color 3d mesh model. (each vertex can have different color)
 // version 0.1
 
 using System;

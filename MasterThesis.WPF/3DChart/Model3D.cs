@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class translate mesh3d object to ModelVisual3D object.
+﻿// class translate mesh3d object to ModelVisual3D object.
 // version 0.1
 
 using System.Collections;

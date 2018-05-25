@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace Kursova
+namespace SimplifiedEquations.WPF
 {
     /// <summary>
     /// Interaction logic for ResultWindow.xaml

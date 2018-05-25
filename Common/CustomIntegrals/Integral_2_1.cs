@@ -14,7 +14,7 @@ namespace Common.CustomIntegrals
         {
             _radius = radius;
 
-            MathExpression = new Lazy<MathExpression>(() => new MathExpression("ln((sqrt((a*cos(t)-s)^2+(a*sin(t))^2))^(0-1))*a"));
+            MathExpression = new Lazy<MathExpression>(() => new MathExpression("ln((sqrt((a*cos(s)-t)^2+(a*sin(s))^2))^(0-1))*a"));
         }
 
         public double Calculate(double from, double to, double colocationPoint)

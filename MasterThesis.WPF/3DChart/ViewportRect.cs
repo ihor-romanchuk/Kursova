@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class for draw 2D rectangular in Viewport3D.
+﻿// class for draw 2D rectangular in Viewport3D.
 // version 0.1
 
 //      vertex index

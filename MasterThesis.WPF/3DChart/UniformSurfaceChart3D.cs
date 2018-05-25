@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class of a special surface chart, (uniform grid in x-y direction)
+﻿// class of a special surface chart, (uniform grid in x-y direction)
 // version 0.1
 
 

@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// class set 3d model color using image brush
+﻿// class set 3d model color using image brush
 // version 0.1
 
 // image size is 64x64

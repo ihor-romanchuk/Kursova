@@ -31,7 +31,7 @@ namespace Common
             Func<Settings, int, int, double> matrixAInit = (_settings, i, j) =>
             {
                 ICustomIntegral integral;
-                double lambda = 1;
+                Func<double, double> lambda = p => 1;
                 if (i < _settings.PartitionsOnCrack)
                 {
                     if (j < _settings.PartitionsOnCrack)
@@ -43,7 +43,7 @@ namespace Common
                         j++;
                         integral = integral_1_2;
                     }
-                    lambda = _settings.Lambda;
+                    lambda = p => _settings.Lambda.Calculate(p);
                 }
                 else
                 {
@@ -59,7 +59,7 @@ namespace Common
                 }
 
                 int handleTao = i < _settings.PartitionsOnCrack && j < _settings.PartitionsOnCrack && i == j ? 1 : 0;
-                return integral.Calculate(_settings.PartitionPoints[j], _settings.PartitionPoints[j + 1], _settings.ColocationPoints[i]) * lambda + handleTao;
+                return integral.Calculate(_settings.PartitionPoints[j], _settings.PartitionPoints[j + 1], _settings.ColocationPoints[i]) * lambda(_settings.ColocationPoints[i]) + handleTao;
             };
 
             Func<Settings, int, double> matrixBInit = (_settings, i) =>

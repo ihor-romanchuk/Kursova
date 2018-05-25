@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using AutoMapper;
 using Common;
 
-namespace Kursova
+namespace SimplifiedEquations.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

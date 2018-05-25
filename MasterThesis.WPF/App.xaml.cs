@@ -41,6 +41,7 @@ namespace MasterThesis.WPF
                 mapper.CreateMap<Settings, Settings>();
                 mapper.CreateMap<MainWindowViewModel, Settings>()
                 .ForMember(dest => dest.Radius, opts => opts.MapFrom(src => src.Radius))
+                .ForMember(dest => dest.Lambda, opts => opts.MapFrom(src => new MathExpression(src.Lambda)))
                 .ForMember(dest => dest.FunctionF, opts => opts.MapFrom(src => new MathExpression(src.FunctionF)))
                 .ForMember(dest => dest.FunctionG, opts => opts.MapFrom(src => new MathExpression(src.FunctionG)))
                 .ForMember(dest => dest.PartitionsOnCrack, opts => opts.MapFrom(src => src.PartitionsOnCrack))

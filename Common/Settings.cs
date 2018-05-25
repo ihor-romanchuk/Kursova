@@ -30,7 +30,7 @@ namespace Common
         public int PartitionsOnCrack { get; set; }
         public int PartitionsOnBound { get; set; }
         public int MeshSize { get; set; }
-        public double Lambda { get; set; }
+        public MathExpression Lambda { get; set; }
 
 
         public List<double> PartitionPoints

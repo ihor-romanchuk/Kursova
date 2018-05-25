@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 
-namespace Kursova
+namespace SimplifiedEquations.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------
-// (c) Copywrite Jianzhong Zhang
-// This code is under The Code Project Open License
-// Please read the attached license document before using this class
-//------------------------------------------------------------------
-
-// A dot in 3D space
+﻿// A dot in 3D space
 // version 0.1
 
 namespace MasterThesis.WPF

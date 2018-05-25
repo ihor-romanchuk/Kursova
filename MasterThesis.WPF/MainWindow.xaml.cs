@@ -44,11 +44,11 @@ namespace MasterThesis.WPF
             {
                 FunctionF = "1",
                 FunctionG = "1",
-                Lambda = 1,
+                Lambda = "1",
                 PartitionsOnCrack = 10,
                 PartitionsOnBound = 20,
                 MeshSize = 20,
-                Radius = 50
+                Radius = 2
             };
             DataContext = ViewModel;
 
@@ -92,10 +92,10 @@ namespace MasterThesis.WPF
             var taoValues = vector.Take(Settings.PartitionsOnCrack).Select(p => p.Value).ToList();
             var sigmaValues = vector.Skip(Settings.PartitionsOnCrack).Select(p => p.Value).ToList();
 
-            TestSurfacePlot(vertex => _integralSystemSolver.Solve(Settings, taoValues, sigmaValues, vertex.x, vertex.y), Settings.MeshSize);
+            Draw(vertex => _integralSystemSolver.Solve(Settings, taoValues, sigmaValues, vertex.x, vertex.y), Settings.MeshSize);
         }
 
-        public void TestSurfacePlot(Func<Vertex3D, double> calculateZ, int nGridNo)
+        public void Draw(Func<Vertex3D, double> calculateZ, int nGridNo)
         {
             int nXNo = nGridNo;
             int nYNo = nGridNo;
@@ -113,6 +113,7 @@ namespace MasterThesis.WPF
             }
             UpdateResultTable();
             _3dChartData.GetDataRange();
+            //_3dChartData.SetAxes();
 
             // 3. set the surface chart color according to z vaule
             double zMin = _3dChartData.ZMin();
